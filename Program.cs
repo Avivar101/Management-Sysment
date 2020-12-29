@@ -16,7 +16,7 @@ namespace Management_Sysment
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ManageProducts());
+            Application.Run(new ManageOrders());
         }
     }
 }
