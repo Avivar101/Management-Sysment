@@ -17,6 +17,7 @@ namespace Management_Sysment
         int num = 0;
         int uprice, totprice, qty;
         string product;
+        int flag = 0;
 
 
         public ManageOrders()
@@ -108,8 +109,9 @@ namespace Management_Sysment
         {
             product = ProductGV.SelectedRows[0].Cells[1].Value.ToString();
             uprice =Convert.ToInt32( ProductGV.SelectedRows[0].Cells[3].Value.ToString());
-            qty = Convert.ToInt32(qtyTb.Text);
-            totprice = qty * uprice;
+            // qty = Convert.ToInt32(qtyTb.Text);
+            // totprice = qty * uprice;
+            flag = 1;
         }
 
         private void searchDD_SelectedIndexChanged(object sender, EventArgs e)
@@ -138,7 +140,14 @@ namespace Management_Sysment
 
         private void add_Click(object sender, EventArgs e)
         {
+            if (qtyTb.Text == "")
+                MessageBox.Show("P;s enter quantity of products");
+            else if (flag == 0)
+                MessageBox.Show("select the products");
+            else
+            {
 
+            }
         }
     }
 }
