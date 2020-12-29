@@ -107,7 +107,9 @@ namespace Management_Sysment
         private void ProductGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             product = ProductGV.SelectedRows[0].Cells[1].Value.ToString();
-            qty = ProductGV.SelectedRows[0].Cells[2].Value.ToString();
+            uprice =Convert.ToInt32( ProductGV.SelectedRows[0].Cells[3].Value.ToString());
+            qty = Convert.ToInt32(qtyTb.Text);
+            totprice = qty * uprice;
         }
 
         private void searchDD_SelectedIndexChanged(object sender, EventArgs e)
