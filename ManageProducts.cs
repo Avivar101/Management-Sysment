@@ -26,7 +26,7 @@ namespace Management_Sysment
         SqlConnection Con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user\Documents\inventorydb.mdf;Integrated Security=True;Connect Timeout=30");
 
 
-        //to fill in the product categories added in category page into thr product dropDowm
+        //this method is meant to select the categories added in managecategories and to fill it in the product category and search filter
         void fillcategory()
         {
             string query = "select * from CategoryTbl";
@@ -41,28 +41,8 @@ namespace Management_Sysment
                 dt.Load(rdr);
                 CatDropDown.ValueMember = "Catname";
                 CatDropDown.DataSource = dt;
-                Con.Close();
-            }
-            catch
-            {
-
-            }
-        }
-
-        void fillsearch()
-        {
-            string query = "select * from CategoryTbl where Catname='"+ searchDD.SelectedValue.ToString() +"'";
-            SqlCommand cmd = new SqlCommand(query, Con);
-            SqlDataReader rdr;
-            try
-            {
-                Con.Open();
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Catname", typeof(string));
-                rdr = cmd.ExecuteReader();
-                dt.Load(rdr);
-                CatDropDown.ValueMember = "Catname";
-                CatDropDown.DataSource = dt;
+                searchDD.ValueMember = "Catname";
+                searchDD.DataSource = dt;
                 Con.Close();
             }
             catch
@@ -90,11 +70,31 @@ namespace Management_Sysment
             }
         }
 
+
+        //this method is filter the categories and display the selected one in the table
+        void filterbycategory()
+        {
+            try
+            {
+                Con.Open();
+                string Myquery = "select * from ProductTbl where ProductCategory='" + CatDropDown.SelectedValue.ToString() +"'";
+                SqlDataAdapter da = new SqlDataAdapter(Myquery, Con);
+                SqlCommandBuilder builder = new SqlCommandBuilder(da);
+                var ds = new DataSet();
+                da.Fill(ds);
+                ProductGV.DataSource = ds.Tables[0];
+                Con.Close();
+            }
+            catch
+            {
+
+            }
+        }
+
         private void ManageProducts_Load(object sender, EventArgs e)
         {
             fillcategory();
             populate();
-            fillsearch();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -161,7 +161,12 @@ namespace Management_Sysment
 
         private void search_Click(object sender, EventArgs e)
         {
-            fillsearch();
+            filterbycategory();
+        }
+
+        private void refresh_Click(object sender, EventArgs e)
+        {
+            populate();
         }
     }
 }
