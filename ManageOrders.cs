@@ -141,7 +141,7 @@ namespace Management_Sysment
         private void add_Click(object sender, EventArgs e)
         {
             if (qtyTb.Text == "")
-                MessageBox.Show("P;s enter quantity of products");
+                MessageBox.Show("Pls enter quantity of products");
             else if (flag == 0)
                 MessageBox.Show("select the products");
             else
