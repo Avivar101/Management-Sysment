@@ -332,6 +332,7 @@ namespace Management_Sysment
             this.orderGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.orderGV.Size = new System.Drawing.Size(537, 178);
             this.orderGV.TabIndex = 33;
+            this.orderGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.orderGV_CellContentClick);
             // 
             // Num
             // 

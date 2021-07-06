@@ -133,10 +133,16 @@ namespace Management_Sysment
             }
         }
 
+        private void orderGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
         private void refresh_Click(object sender, EventArgs e)
         {
             populateproducts();
         }
+
 
         private void add_Click(object sender, EventArgs e)
         {
@@ -146,7 +152,11 @@ namespace Management_Sysment
                 MessageBox.Show("select the products");
             else
             {
-
+                num = num + 1;
+                qty = Convert.ToInt32(qtyTb.Text);
+                totprice = qty * uprice;
+                table.Rows.Add(num, product, qty, uprice, totprice);
+                orderGV.DataSource = table;
             }
         }
     }
